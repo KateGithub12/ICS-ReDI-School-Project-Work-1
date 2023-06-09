@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>To do list</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body {
+      background-color: palevioletred;
+    }
+
+    .header {
+      background-color:ivory ;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .image {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <h2>GET IT DONE </h2>
+    <h4>The task manager app </h4>
+    <p>Hello and welcome, {{ name }}</p>
+    <p>This web app allows you to organize and keep track of all your commitments by creating a To do list. Yes, Get it done!.</p>
+  </div>
+
+  <div class="image">
+  <p><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc6XysC4ht0pl53hkg2in7fCPdakItbrHvQw&usqp=CAU" alt="Image" width="150px"> </p>
+  </div>
+
+  <form action="/add" method="POST">
+    <input type="text" name="task" placeholder="Enter a task">
+    <button type="submit">Add Task</button>
+  </form><br><br>
+
+  <ul>
+    {% for task in tasks %}
+    <li>
+      {{ task['name'] }}
+      {% if not task['done'] %}
+      <a href="/update/{{ loop.index }}">Mark as Done</a>
+      {% else %}
+      <a href="/update/{{ loop.index }}">Mark as Undone</a>
+      {% endif %}
+      <a href="/delete/{{ loop.index }}">Delete</a>
+    </li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
+
